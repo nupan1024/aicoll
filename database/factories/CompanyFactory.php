@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class CompanyFactory extends Factory
 {
     protected $model = Company::class;
+
     public function definition(): array
     {
         return [
@@ -15,7 +16,7 @@ class CompanyFactory extends Factory
             'name' => $this->faker->company,
             'address' => $this->faker->address,
             'phone_number' => $this->faker->numerify('##########'),
-            'status' => $this->faker->randomElement(['ACTIVE', 'INACTIVE'])
+            'status' => $this->faker->randomElement(['ACTIVE', 'INACTIVE']),
         ];
     }
 }
