@@ -2,17 +2,14 @@
 
 namespace App\Constants;
 
-interface CompanyStatus
+enum CompanyStatus: string
 {
-    const ACTIVE = 'ACTIVE';
+    case ACTIVE = 'Active';
 
-    const INACTIVE = 'INACTIVE';
+    case INACTIVE = 'Inactive';
 
     public static function getStatusList(): array
     {
-        return [
-            self::ACTIVE,
-            self::INACTIVE,
-        ];
+        return array_column(self::cases(), 'value');
     }
 }
