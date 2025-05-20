@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Constants\CompanyStatus;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,7 +17,7 @@ class CompanyFactory extends Factory
             'name' => $this->faker->company,
             'address' => $this->faker->address,
             'phone_number' => $this->faker->numerify('##########'),
-            'status' => $this->faker->randomElement(['ACTIVE', 'INACTIVE']),
+            'status' => $this->faker->randomElement(CompanyStatus::getStatusList()),
         ];
     }
 }

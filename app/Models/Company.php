@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\CompanyStatus;
 use Database\Factories\CompanyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,11 @@ class Company extends Model
         'phone_number',
         'status',
     ];
+
+    public function getCompaniesActive()
+    {
+        return $this->where('status', CompanyStatus::ACTIVE)->get();
+    }
 
     protected static function newFactory(): CompanyFactory
     {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\CompanyStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('name', length: 100);
             $table->string('address', length: 100);
             $table->string('phone_number', length: 10);
-            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
+            $table->enum('status', CompanyStatus::getStatusList())->default(CompanyStatus::ACTIVE);
             $table->timestamps();
             $table->softDeletes();
         });
