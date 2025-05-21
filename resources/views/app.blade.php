@@ -44,6 +44,7 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
+        <input type="hidden" id="_token" value="{{ csrf_token() }}">
         @inertia
     </body>
 </html>
