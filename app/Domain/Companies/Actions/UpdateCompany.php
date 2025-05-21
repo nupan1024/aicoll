@@ -2,7 +2,7 @@
 
 namespace App\Domain\Companies\Actions;
 
-use App\Models\Company;
+use App\Domain\Companies\Models\Company;
 use Illuminate\Support\Facades\Log;
 
 class UpdateCompany

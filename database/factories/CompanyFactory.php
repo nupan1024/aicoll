@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Constants\CompanyStatus;
-use App\Models\Company;
+use App\Domain\Companies\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompanyFactory extends Factory

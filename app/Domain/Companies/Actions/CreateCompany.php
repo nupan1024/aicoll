@@ -2,7 +2,7 @@
 
 namespace App\Domain\Companies\Actions;
 
-use App\Models\Company;
+use App\Domain\Companies\Models\Company;
 use Illuminate\Support\Facades\Log;
 
 class CreateCompany
@@ -10,7 +10,7 @@ class CreateCompany
     public static function execute(array $params): bool
     {
         try {
-            $company = new Company;
+            $company = new Company();
             $company->nit = $params['nit'];
             $company->name = $params['name'];
             $company->address = $params['address'];

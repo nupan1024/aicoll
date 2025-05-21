@@ -2,7 +2,7 @@
 
 namespace App\Support\ViewModels\Company;
 
-use App\Models\Company;
+use App\Domain\Companies\Models\Company;
 use App\Support\ViewModels\ViewModel;
 
 class IndexViewModel extends ViewModel

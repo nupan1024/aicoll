@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Company;
 
-use App\Models\Company;
+use App\Domain\Companies\Models\Company;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateCompanyRequest extends FormRequest

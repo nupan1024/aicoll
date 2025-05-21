@@ -8,7 +8,7 @@ use App\Domain\Companies\Actions\UpdateCompany;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\CreateCompanyRequest;
 use App\Http\Requests\Company\UpdateCompanyRequest;
-use App\Models\Company;
+use App\Domain\Companies\Models\Company;
 use App\Support\ViewModels\Company\IndexViewModel;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;

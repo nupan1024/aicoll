@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain\Companies\Models;
 
 use App\Constants\CompanyStatus;
 use Database\Factories\CompanyFactory;
