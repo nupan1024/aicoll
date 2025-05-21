@@ -15,7 +15,6 @@ class CreateCompany
             $company->name = $params['name'];
             $company->address = $params['address'];
             $company->phone_number = $params['phone_number'];
-            $company->status = $params['status'];
 
             return $company->save();
         } catch (\Exception $e) {

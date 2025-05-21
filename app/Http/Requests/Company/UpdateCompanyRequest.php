@@ -12,7 +12,7 @@ class UpdateCompanyRequest extends FormRequest
             'name' => 'required|string|max:100',
             'address' => 'required|string|max:100',
             'phone_number' => 'required|string|max:10',
-            'status' => ['required', 'boolean'],
+            'status' => 'required|string',
         ];
     }
 }

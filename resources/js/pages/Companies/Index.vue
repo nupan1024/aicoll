@@ -4,26 +4,50 @@ import { Head, useForm } from '@inertiajs/vue3';
 import Modal from '@/components/Modal.vue'
 import Button from '@/components/ui/button/Button.vue'
 import Input from '@/components/ui/input/Input.vue';
+import Alert from '@/components/Alert.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
 
 
 const isOpenModal = ref(false);
+const isOpenModalUpdate = ref(false);
+const isOpenModalDelete = ref(false);
+
 const props = defineProps({ companies: Object });
 
 const form = useForm({
+    nit: '',
     name: '',
     address: '',
     phone_number: '',
-    status: '',
 });
 
 
-const openModal = (e) => {
-    isOpenModal.value = true;
+const openModal = (modalType) => {
+            console.log(modalType);
+
+    switch(modalType){
+        case 'create':
+            isOpenModal.value = true;
+        case 'update':
+            isOpenModalUpdate.value = true;
+        case 'delete': 
+            isOpenModalDelete.value = true;
+    }
 };
 
-const closeModal = () => {
+const closeModal = (modalType) => {
     form.reset();
-    isOpenModal.value = false;
+        console.log(modalType);
+
+    switch(modalType){
+        case 'create':
+            isOpenModal.value = false;
+        case 'update':
+            isOpenModalUpdate.value = false;
+        case 'delete': 
+            isOpenModalDelete.value = false;
+    }
 };
 
 const createCompany = () => {
@@ -31,16 +55,22 @@ const createCompany = () => {
         forceFormData: true,
     });
 
-    closeModal();
+    closeModal('create');
 };
 
 </script>
 <template>
+    <MainLayout>
+
     <Head :title=$page.props.$t.companies.title />
+
+    <div v-if="$page.props.flash.message">
+        <Alert :type="$page.props.flash.type" :message="$page.props.flash.message" />
+    </div>
 
     <div class="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm dark:bg-gray-900 dark:border-gray-700">
 
-        <button @click="openModal">{{ $page.props.$t.companies.create }}</button>
+        <a :href="route('company.create')">{{ $page.props.$t.companies.create }}</a>
         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-gray-800">
                 <tr>
@@ -60,8 +90,8 @@ const createCompany = () => {
                     <td class="px-4 py-3 whitespace-nowrap">{{ company.phone_number }}</td>
                     <td class="px-4 py-3 whitespace-nowrap">{{ company.status }}</td>
                     <td class="px-4 py-3 whitespace-nowrap">
-                        <a>{{ $page.props.$t.companies.edit }}</a>
-                        <a>{{ $page.props.$t.companies.delete }}</a>
+                        <a :href="route('company.edit', company.id)">{{ $page.props.$t.companies.edit }}</a>
+                        <button @click="openModal('delete')">{{ $page.props.$t.companies.delete }}</button>
                     </td>
                 </tr>
             </tbody>
@@ -84,11 +114,15 @@ const createCompany = () => {
         </div>
     </div>
 
-<Modal :show="isOpenModal" @close="closeModal">
+<Modal :show="isOpenModal" @close="closeModal('create')">
     <template #default>
         <div class="p-6 dark:divide-gray-700">
             <h2 class="text-lg font-semibold mb-4">{{ $page.props.$t.companies.create }}</h2>
             <form @submit.prevent="createCompany" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">{{ $page.props.$t.companies.nit }}</label>
+                    <Input v-model="form.nit" type="text" />
+                </div>
                 <div>
                     <label class="block text-sm font-medium mb-1">{{ $page.props.$t.companies.name }}</label>
                     <Input v-model="form.name" type="text" />
@@ -101,19 +135,8 @@ const createCompany = () => {
                     <label class="block text-sm font-medium mb-1">{{ $page.props.$t.companies.phone_number }}</label>
                     <Input v-model="form.phone_number" type="text" />
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">{{ $page.props.$t.companies.status }}</label>
-                    <button
-                        type="button"
-                        @click="form.status = form.status === 'active' ? 'inactive' : 'active'"
-                        :class="form.status === 'active' ? 'bg-green-500 text-white' : 'bg-gray-300 text-gray-700'"
-                        class="w-24 py-2 rounded transition"
-                    >
-                        {{ form.status === 'active' ? $page.props.$t.companies.status_active : $page.props.$t.companies.status_inactive }}
-                    </button>
-                </div>
                 <div class="mt-6 flex justify-end">
-                    <Button variant="secondary" @click="closeModal" type="button">
+                    <Button variant="secondary" @click="closeModal('create')" type="button">
                         {{ $page.props.$t.companies.cancel }}
                     </Button>
                     <Button class="ml-3" type="submit">
@@ -124,4 +147,8 @@ const createCompany = () => {
         </div>
     </template>
 </Modal>
+
+
+    </MainLayout>
+
 </template>

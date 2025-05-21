@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\ViewModels\Company;
+namespace App\Domain\Companies\ViewModels;
 
 use App\Domain\Companies\Models\Company;
 use App\Support\ViewModels\ViewModel;
