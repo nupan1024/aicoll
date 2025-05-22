@@ -13,5 +13,7 @@ Route::patch('/company/{company}/update', [CompanyController::class, 'update'])-
 
 Route::delete('/company/{company}/delete', [CompanyController::class, 'delete'])->name('company.delete');
 
+Route::get('/companies', [CompanyController::class, 'getCompanies'])->name('companies');
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

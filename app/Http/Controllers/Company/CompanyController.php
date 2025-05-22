@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Company;
 
 use App\Domain\Companies\Actions\CreateCompany;
 use App\Domain\Companies\Actions\DeleteCompany;
+use App\Domain\Companies\Actions\ListCompanies;
 use App\Domain\Companies\Actions\UpdateCompany;
 use App\Domain\Companies\ViewModels\EditViewModel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Company\CreateCompanyRequest;
 use App\Http\Requests\Company\UpdateCompanyRequest;
 use App\Domain\Companies\Models\Company;
-use App\Domain\Companies\ViewModels\IndexViewModel;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,7 +21,7 @@ class CompanyController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Companies/Index', app(IndexViewModel::class));
+        return Inertia::render('Companies/Index');
     }
 
     public function create(): Response
@@ -61,5 +63,17 @@ class CompanyController extends Controller
             'message' => __('companies.success_delete'),
             'type' => 'success',
         ]);
+    }
+
+    public function getCompanies(Request $request): JsonResponse
+    {
+        $filter = $request->get('filter');
+        
+        return response()->json(
+            ListCompanies::execute([
+                'filter' => $filter,
+                'page' => $request->get('page', 1)
+            ])
+        );
     }
 }
