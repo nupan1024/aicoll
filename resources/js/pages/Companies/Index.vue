@@ -120,8 +120,12 @@ loadCompanies();
                     <div><span class="font-semibold">{{ $page.props.$t.companies.phone_number }}:</span> {{ company.phone_number }}</div>
                     <div><span class="font-semibold">{{ $page.props.$t.companies.status }}:</span> {{ company.status }}</div>
                     <div>
-                        <a :href="route('company.edit', company.id)">{{ $page.props.$t.companies.edit }}</a>
-                        <button v-if="company.status === $page.props.$t.companies.inactive" :data-name="company.name" :data-id="company.id" @click="openModal">{{ $page.props.$t.companies.delete }}</button>
+                        <div class="flex items-center space-x-3">
+                            <a :href="route('company.edit', company.id)" class="hover:underline">{{ $page.props.$t.companies.edit }}</a>
+                            <a v-if="company.status === $page.props.$t.companies.inactive" :data-name="company.name" :data-id="company.id" href="#" @click="openModal" class="hover:underline">
+                                {{ $page.props.$t.companies.delete }}
+                            </a>
+                        </div>   
                     </div>
                 </div>
             </div>

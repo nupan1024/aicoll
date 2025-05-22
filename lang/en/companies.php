@@ -17,6 +17,7 @@ return [
     'success_create' => 'The company has been created successfully,',
     'success_update' => 'The company has been updated successfully.',
     'success_delete' => 'The company has been deleted successfully',
+    'error_delete' => 'You cannot delete an ACTIVE company',
     'msj_delete' => 'Are you sure you want to delete the company',
     'search' => 'Search company',
     'inactive' => CompanyStatus::INACTIVE,

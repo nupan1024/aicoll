@@ -57,7 +57,12 @@ class CompanyController extends Controller
 
     public function delete(Company $company): RedirectResponse
     {
-        DeleteCompany::execute($company);
+        if(!DeleteCompany::execute($company)){
+            return redirect()->route('dashboard')->with([
+                'message' => __('companies.error_delete'),
+                'type' => 'error',
+            ]);
+        }
 
         return redirect()->route('dashboard')->with([
             'message' => __('companies.success_delete'),
