@@ -16,14 +16,14 @@ class ListCompanies
             'status',
             'phone_number',
             'address'
-            )->when($params['filter'], function ($query, $filter) {
-                    return $query->where(function ($query) use ($filter) {
-                        $query->where('name', 'like', '%'.$filter.'%')
-                            ->orWhere('nit', 'like', '%'.$filter.'%')
-                            ->orWhere('phone_number', 'like', '%'.$filter.'%')
-                            ->orWhere('address', 'like', '%'.$filter.'%')
-                            ->orWhere('status', 'like', '%'.$filter.'%');
-                    });
-            })->latest('id')->paginate(10);
+        )->when($params['filter'], function ($query, $filter) {
+            return $query->where(function ($query) use ($filter) {
+                $query->where('name', 'like', '%'.$filter.'%')
+                    ->orWhere('nit', 'like', '%'.$filter.'%')
+                    ->orWhere('phone_number', 'like', '%'.$filter.'%')
+                    ->orWhere('address', 'like', '%'.$filter.'%')
+                    ->orWhere('status', 'like', '%'.$filter.'%');
+            });
+        })->latest('id')->paginate(10);
     }
 }

@@ -7,7 +7,6 @@ use App\Support\ViewModels\ViewModel;
 
 class EditViewModel extends ViewModel
 {
-
     public function toArray(): array
     {
         return [
